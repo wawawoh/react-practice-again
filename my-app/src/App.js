@@ -4,6 +4,7 @@ import "./App.css";
 import Task2 from "./Task2";
 import Task3 from "./Task3";
 import Task4 from "./Task4";
+import Task5 from "./task5";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Task2 />
       <Task3 />
       <Task4 />
+      <Task5 />
     </div>
   );
 }

@@ -2,40 +2,38 @@ import { useEffect, useState } from "react";
 
 export default function Task3() {
   const [task, setTask] = useState("");
-  const [taskList, setTaskList] = useState(["Buy Milk", "read mandy fanfic"]);
+  const [taskList, setTaskList] = useState([]);
 
-  const deleteTodo = (indexToDelete) => {
-    setTaskList((prev) => prev.filter((_, i) => i !== indexToDelete));
-  };
-
-  const submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setTaskList((prev) => [...prev, task]);
     setTask("");
   };
-
+  const removeTask = (indexToRemove) => {
+    const newList = taskList.filter((_, index) => {
+      return index !== indexToRemove;
+    });
+    setTaskList(newList);
+  };
   return (
     <>
-      <h1>this is a todo list hehe</h1>
-      <form onSubmit={submit}>
-        <label htmlFor="task"> Task: </label>
-        <input
-          onChange={(e) => setTask(e.target.value)}
-          type="text"
-          id="task"
-          name="task"
-          value={task}
-        />
-
-        <button type="submit">submit</button>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <label htmlFor="task">
+          Enter a task:
+          <input
+            type="text"
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
+          />
+          <button type="submit">submit</button>
+        </label>
       </form>
-
       <ul>
-        {taskList.map((value, index) => {
+        {taskList.map((task, index) => {
           return (
             <li key={index}>
-              <span>{value}</span>
-              <button onClick={() => deleteTodo(index)}>done</button>
+              <span>{task}</span>
+              <button onClick={() => removeTask(index)}>remove</button>
             </li>
           );
         })}
